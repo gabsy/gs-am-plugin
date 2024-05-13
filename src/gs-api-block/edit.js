@@ -46,7 +46,10 @@ const Edit = ({ attributes, setAttributes }) => {
 			const responseData = response.data;
 
 			// Check if the response data is empty
-			if (!responseData.data.headers.length || !Object.values(responseData.data.rows).length) {
+			if (
+				!responseData.data.headers.length ||
+				!Object.values(responseData.data.rows).length
+			) {
 				throw new Error('No data available');
 			}
 
@@ -89,7 +92,7 @@ const Edit = ({ attributes, setAttributes }) => {
 							setAttributes({ currentDataUse: !currentDataUse });
 						}}
 						help={__(
-							'If not checked, the block will load dynamic data via API when displayed on frontend.',
+							'Set current data as block attributes. If disabled, the block will display the latest data from cache table.',
 							'gs-am-plugin',
 						)}
 					/>

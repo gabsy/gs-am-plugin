@@ -16,6 +16,7 @@ namespace GS\AM;
 // Constants
 define('GS_API_CACHE_TABLE', 'gs_api_cache');
 define('GS_API_PLUGIN_URL', 'https://miusage.com/v1/challenge/1/');
+define('GS_API_CACHE_EXPIRATION', 3600);
 
 require_once __DIR__ . '/inc/api.php';
 require_once __DIR__ . '/inc/setup-table.php';

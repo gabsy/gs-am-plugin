@@ -35,13 +35,15 @@ function store_api_response( string $endpoint_url, string $response_data, int $e
  * 
  * @return mixed Cached API response data or false
  */
-function get_cached_api_response( string $endpoint_url ): mixed {
+function get_cached_api_response( string $endpoint_url, bool $cache_only = false ): mixed {
 	global $wpdb;
 	$table_name = $wpdb->prefix . GS_API_CACHE_TABLE;
 	$cached_data = $wpdb->get_row("SELECT * FROM $table_name WHERE endpoint_url = '$endpoint_url'", ARRAY_A);
 
-	// Check if cached data exists and not expired
-	if ( $cached_data && $cached_data['expiration_timestamp'] > time() ) {
+	if (
+		$cached_data && $cached_data['expiration_timestamp'] > time() ||
+		$cached_data && $cache_only && $cached_data['expiration_timestamp'] < time()
+		) {
 		return $cached_data['response_data'];
 	} else {
 		return false;
@@ -55,11 +57,11 @@ function get_cached_api_response( string $endpoint_url ): mixed {
  * 
  * @return mixed API response data or false
  */
-function make_api_request( bool $is_forced = false ): mixed {
+function make_data_request( bool $is_forced = false, bool $cache_only = false ): mixed {
 	$endpoint_url = GS_API_PLUGIN_URL;
 
 	// Check if cached data exists in the custom table
-	$cached_response = get_cached_api_response($endpoint_url);
+	$cached_response = get_cached_api_response($endpoint_url, $cache_only);
 
 	if ( $cached_response !== false && !$is_forced ) {
 		return $cached_response;
@@ -70,7 +72,7 @@ function make_api_request( bool $is_forced = false ): mixed {
 			$response_data = \wp_remote_retrieve_body($response);
 			
 			// Set expiration time
-			$expiration_time = \time() + 600; // 10 minutes
+			$expiration_time = \time() + GS_API_CACHE_EXPIRATION;
 	
 			// Store API response in the database
 			store_api_response($endpoint_url, $response_data, $expiration_time);
@@ -89,10 +91,7 @@ function make_api_request( bool $is_forced = false ): mixed {
  * @return void
  */
 function fetch_api_data(): void {
-	// $response = make_api_request();
-	// \wp_send_json($response);
-	$response = \json_decode( make_api_request() );
-	// $response = \isset( $response->data ) ? $response->data : false;
+	$response = \json_decode( make_data_request() );
 	\wp_send_json( $response );
 }
 

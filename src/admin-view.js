@@ -4,7 +4,7 @@
 import axios from 'axios';
 import formattedDate from './js/utils/formatted-date';
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 	if (!document.querySelector('.btn-refresh-data')) {
 		return;
 	}
@@ -12,13 +12,14 @@ document.addEventListener('DOMContentLoaded', function() {
 	const dataTableTitle = document.querySelector('.data-table-title span');
 	const dataTableBody = document.querySelector('.data-table tbody');
 
+	// Refresh button click event listener
 	refreshButton.addEventListener('click', function () {
-
 		// Display loading message
 		dataTableBody.innerHTML = '<tr><td colspan="5" class="loader">Loading data...</td></tr>';
 
-		// Call the fetch function
-		setTimeout(() => fetchData(), 500);
+		// Call the fetch function. It will display the latest data form cache table.
+		// If the cache is empty or data expired, it will fetch the data from the API.
+		setTimeout(() => fetchData(), 300);
 	});
 
 	async function fetchData() {
@@ -29,18 +30,15 @@ document.addEventListener('DOMContentLoaded', function() {
 				},
 			});
 			onCallSuccess(response.data, dataTableBody, dataTableTitle);
-		
 		} catch (error) {
-
 			// Display error message
 			dataTableBody.innerHTML = `<tr><td colspan="5" class="error-message"> ${error.message} </td></tr>`;
 		}
-	};
+	}
 });
 
 // On call success function
 function onCallSuccess(data, dataTableBody, dataTableTitle) {
-
 	// Convert rows object to array of objects
 	const dataRows = Object.values(data.data.rows);
 	const dataHeaders = data.data.headers;

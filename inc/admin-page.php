@@ -9,7 +9,7 @@ declare( strict_types=1 );
 
 namespace GS\AM\AdminPage;
 
-use function GS\AM\APIFunctions\make_api_request;
+use function GS\AM\APIFunctions\make_data_request;
 use function GS\AM\AdminView\render_table;
 
 /**
@@ -36,7 +36,7 @@ function gs_register_custom_menu_page(): void {
  * @return void
  */
 function gs_api_plugin_page(): void {
-	$response = make_api_request();
+	$response = make_data_request();
 
 	// Output the page header
 	$output   = '<div class="gs-admin-wrapper"><h1><img src="' . plugin_dir_url( dirname( __FILE__ ) ) . 'assets/logo.svg" alt="' . \__('Gabi Schiopu API Plugin','gs-am-plugin') . '"></h1>';

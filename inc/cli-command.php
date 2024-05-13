@@ -10,7 +10,7 @@ declare( strict_types=1 );
 
 namespace GS\AM\CLICommand;
 
-use function GS\AM\APIFunctions\make_api_request;
+use function GS\AM\APIFunctions\make_data_request;
 use WP_CLI;
 
 if ( ! defined( 'WP_CLI' ) ) {
@@ -23,7 +23,7 @@ if ( ! defined( 'WP_CLI' ) ) {
 class GS_CLI_Refresh_Command {
 
     public function refresh() {
-        make_api_request(true);
+        make_data_request(true);
         WP_CLI::success( 'Data refreshed successfully!' );
     }
 }

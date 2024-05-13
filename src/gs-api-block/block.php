@@ -9,7 +9,7 @@ declare( strict_types = 1 );
 
 namespace GS\AM\APIBlock;
 
-use function GS\AM\APIFunctions\make_api_request;
+use function GS\AM\APIFunctions\make_data_request;
 
 /**
  * Register block.
@@ -31,7 +31,7 @@ function render( array $attributes ): string {
 
 	// Check if the stored data in attributes should be used or load data from API.
 	if ( $atts['currentDataUse'] === false ) {
-		$data = make_api_request();
+		$data = make_data_request(false, true);
 
 		// Decode the JSON string into a PHP array
 		$data_array = \json_decode($data, true);
