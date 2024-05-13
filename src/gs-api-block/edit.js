@@ -63,7 +63,9 @@ const Edit = ({ attributes, setAttributes }) => {
 
 	// Fetch data on initial render only if currentDataUse is set to false
 	useEffect(() => {
-		if (!currentDataUse) {
+		if (currentDataUse) {
+			setIsLoading(false);
+		} else {
 			fetchData();
 		}
 	}, []);
