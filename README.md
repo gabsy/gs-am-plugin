@@ -1,29 +1,17 @@
 # Gabi Schiopu AM API Plugin
 
-**LE**: I also implemented the widgets settings update using a different mock api, through PATCH method. The updates error handling is not properly done on the user view, just through console for now.
+<img width="1001" alt="CleanShot 2024-05-13 at 17 34 11@2x" src="https://github.com/gabsy/gs-am-plugin/assets/871700/c12c0950-629d-4769-acd5-53a36abb7c8c">
 
-The implementation approach of this project is to encapsulate all functionality within a single, self-contained and reusable component. This component is responsible for fetching displaying widgets and handling all related settings internally through its child components. It display the widgets by iterating the ProductWidgetSetup component. This design choice promotes modularity and reusability, allowing the component to be easily integrated into different parts of an application without requiring external configuration, using API URL passed as a prop, eventually stored as an environment variable.
+On plugin activation a custom table is created for data caching purposes. It stores the endpoint, data and expiration timestamp. The data is first fetched and stored to table when the admin page is open or the plugin block is used. The main data fetching function, ```make_data_request``` is checking the cached data, if it exists and not expired it returns it, otherwise it performs an API call for getting a new set of data.
 
-```ProductWidgetSetup``` component is composed of the ```ProductWidget``` and a related settings component. All the settings states for a widget are managed here, ~~updates can be perfomed (not implemented here)~~ records updating through an API call, passing property/value pairs for ```active```, ```isLinked``` and ```widgetColor```, at the time of their state updates.
+This function is also hooked as action of an AJAX endpoint, set for both private and non private access, used for fetching data on block editor and on block template rendering.
+The REFRESH DATA button is also using this endpoint for refreshing the data on admin page. It doesnt force a new API call, it just gets the cached data if not expired, and performs a new API call if the data is expired.
 
-```ProductWidget``` component it is also built as a self-contained, reusable component, used in this context for previewing the setting updates but also ready to be used alone. (well, it does have the logo svg dependency that can be moved to be consumed as prop, not implemented at the time of writing this text).
+<img width="1126" alt="CleanShot 2024-05-13 at 17 45 32@2x" src="https://github.com/gabsy/gs-am-plugin/assets/871700/b30ac2c7-aeb9-4d4f-8c2f-a23325ab9aa3">
 
-The project also includes separate custom UI related components like ```Checkbox```, ```Toggle```, ```Tooltip``` and ```Svgs```. It stores the needed SVGs ( logo, infoIcon ...) as exported components that can be easily imported and rendered as svg markup.
+The block , ```Gabi API Data Block```, has the columns show/hide settings and also a setting to store the data as attributes and display from attributes only, even if the cached data has changed. Loading the block on the frontend does NOT perfom a new API call if the cached is expired, it displays only cached data or the data from attributes.
 
-https://github.com/gabsy/greenspark/assets/871700/e079138b-a0ff-4e2d-be9a-a8d30753e71e
+<img width="400" alt="CleanShot 2024-05-13 at 18 00 44@2x" src="https://github.com/gabsy/gs-am-plugin/assets/871700/18809363-5c22-4407-90d0-ef666f642700">
 
-## Install
+The custom WP-CLI command is set, by running ```wp gs-api-data refresh``` the API call is 'forced', through a bool argument, ```$is_forced``` passed as true to the data fetching function.
 
-It requires Node 18.x and Npm 9.x.
-
-Run ```npm install```.
-
-Run ```npm run dev```, project will start on ```https://localhost:5173```
-
-## Storybook
-Storybook is used for developing and documenting components in isolation. You can run Storybook using ```npm run storybook``` and visit ```localhost:6006``` to view the added components.
-
-<img width="1325" alt="CleanShot 2024-03-17 at 20 54 29@2x" src="https://github.com/gabsy/greenspark/assets/871700/0a491815-17c8-4323-8695-ac3bcfcdd037">
-
-## Testing
-The project uses Vitest for testing. Test files are located alongside the components they are testing. Run ```npm run test``` to run the tests.
