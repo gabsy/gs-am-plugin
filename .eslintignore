@@ -1,0 +1,8 @@
+node_modules
+dist
+build/**/*.css
+build/**/*.js
+build
+vendor
+*.min.js
+app

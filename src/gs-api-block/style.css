@@ -1,0 +1,61 @@
+.gs-api-block,
+.wp-block-gs-api-block {
+	& .table-wrapper {
+		background: #eee;
+        border-radius: 0.5rem;
+        box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.05);
+        overflow-x: auto;
+    }
+
+    h2.data-table-title {
+        font-size: 2rem;
+    }
+
+    & .data-table {
+        border-radius: 0.7rem;
+        border-spacing: 1px;
+		font-size: 0.875rem;
+        overflow: hidden;
+        width: 100%;
+
+        & th {
+            background-color: #1d2327;
+            color: #fff;
+            padding: 1rem 1.25rem;
+            text-align: left;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        & td {
+            background-color: #fff;
+            padding: 1rem 1.25rem;
+            transition: background-color 0.3s ease;
+        }
+
+        tr {
+            & td:nth-child(2) {
+                font-weight: 700;
+            }
+
+            & > td:first-of-type {
+                width: 2.2rem;
+            }
+        }
+
+        tbody tr:hover td {
+            background-color: #f3f5ff;
+        }
+    }
+
+    & .loader,
+	& .error-message {
+		align-items: center;
+		background: #eee;
+		border-radius: 0.5rem;
+		display: flex;
+		justify-content: center;
+		min-height: 10rem;
+        text-align: center;
+    }
+}

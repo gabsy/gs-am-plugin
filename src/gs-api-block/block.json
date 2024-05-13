@@ -1,0 +1,37 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "gs/api-block",
+	"title": "Gabi API Data Block",
+	"description": "Displays the data table with option to hide columns.",
+	"category": "widgets",
+	"textdomain": "gs-am-plugin",
+	"supports": {
+		"html": false,
+		"align": ["wide", "full"]
+	},
+	"attributes": {
+		"showColumns": {
+			"type": "array",
+			"default": []
+		},
+		"tableRows": {
+			"type": "array",
+			"default": []
+		},
+		"tableHeaders": {
+			"type": "array",
+			"default": []
+		},
+		"tableTitle": {
+			"type": "string",
+			"default": ""
+		},
+		"currentDataUse": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"editorScript": "file:../../build/gs-api-block/index.js",
+	"style": "file:../../build/gs-api-block/style.css"
+}

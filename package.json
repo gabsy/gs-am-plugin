@@ -1,0 +1,65 @@
+{
+	"name": "confstack-agenda",
+	"version": "1.0.18",
+	"description": "A complete conference agenda for WordPress based websites.",
+	"author": "Gabi Schiopu",
+	"license": "ISC",
+	"engines": {
+		"node": "18",
+		"npm": ">=8",
+		"yarn": "Please use npm"
+	},
+	"devDependencies": {
+		"@dekode/stylelint-config": "1.0.2",
+		"@wordpress/eslint-plugin": "15.0.0",
+		"@wordpress/scripts": "^26.11.0",
+		"autoprefixer": "^10.4.15",
+		"browser-sync": "^2.29.3",
+		"browser-sync-webpack-plugin": "^2.3.0",
+		"cssnano": "^6.0.1",
+		"dotenv": "^16.3.1",
+		"eslint-plugin-prettier": "^5.0.0",
+		"fast-glob": "^3.3.1",
+		"husky": "^8.0.3",
+		"ignore-emit-webpack-plugin": "^2.0.6",
+		"lint-staged": "14.0.1",
+		"postcss": "^8.4.28",
+		"postcss-custom-media": "^10.0.0",
+		"postcss-flexbugs-fixes": "^5.0.2",
+		"postcss-import": "^15.1.0",
+		"postcss-media-minmax": "^5.0.0",
+		"postcss-mixins": "^9.0.4",
+		"postcss-nested": "^6.0.1",
+		"prettier": "^3.0.2",
+		"resolve-url-loader": "^5.0.0",
+		"webpack-remove-empty-scripts": "^1.0.3"
+	},
+	"scripts": {
+		"prepare": "husky install",
+		"build": "wp-scripts build",
+		"check-engines": "wp-scripts check-engines",
+		"check-licenses": "wp-scripts check-licenses",
+		"start": "wp-scripts start",
+		"format": "prettier --write .",
+		"lint": "npm run lint:js && npm run lint:css",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"lint-staged": "lint-staged"
+	},
+	"lint-staged": {
+		"*.css": [
+			"wp-scripts lint-style"
+		],
+		"*.{js,ts,tsx}": [
+			"prettier --write",
+			"wp-scripts lint-js"
+		]
+	},
+	"dependencies": {
+		"axios": "^1.6.8",
+		"classnames": "^2.3.2",
+		"react-select": "^5.7.4",
+		"react-time-picker": "^6.5.0",
+		"react-timezone-select": "^2.1.2"
+	}
+}

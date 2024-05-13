@@ -1,0 +1,92 @@
+/* GS API Plugin Admin Page Styles */
+.toplevel_page_api-plugin-admin {
+    & #wpcontent {
+        border-top: 6px solid #6179FF;
+        padding: 1rem 2.5rem;
+    }
+
+    & h1 {
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    & h2 {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        font-size: 1.5rem;
+        padding: 1rem 0 0;
+    }
+
+    .btn-refresh-data {
+        background-color: #6179FF;
+        border: none;
+        border-radius: 1rem;
+        color: #fff;
+        cursor: pointer;
+        font-size: 0.75rem;
+        padding: 0.5rem 1rem;
+        text-transform: uppercase;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #3654fe;
+        }
+
+        &.disabled {
+            filter: grayscale(1);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    }
+
+    & .table-wrapper {
+        background: #eee;
+        border-radius: 0.5rem;
+        box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.05);
+        overflow-x: auto;
+    }
+
+    & .data-table {
+        border-radius: 0.7rem;
+        border-spacing: 1px;
+        min-height: 10rem;
+        overflow: hidden;
+        width: 100%;
+
+        & th {
+            background-color: #1d2327;
+            color: #fff;
+            padding: 1rem 1.25rem;
+            text-align: left;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        & td {
+            background-color: #fff;
+            padding: 1rem 1.25rem;
+            transition: background-color 0.3s ease;
+        }
+
+        tr {
+            & td:nth-child(2) {
+                font-weight: 700;
+            }
+
+            & > td:first-of-type {
+                width: 2.2rem;
+            }
+        }
+
+        tbody tr:hover td {
+            background-color: #f3f5ff;
+        }
+    }
+
+    & .loader {
+        text-align: center;
+    }
+}
