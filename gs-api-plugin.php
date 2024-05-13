@@ -45,8 +45,8 @@ function load_domain(): void {
 
 function enqueue_gs_scripts(): void {
 	\wp_enqueue_style('gs-admin-style', plugins_url('/build/admin-view.css', __FILE__));
-	\wp_enqueue_script( 'gs-refresh-ajax-script', plugin_dir_url( __FILE__ ) . '/build/admin-view.js', array('jquery'), '1.0', true );
-    \wp_localize_script( 'gs-refresh-ajax-script', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+	\wp_enqueue_script('gs-admin-script', plugins_url('/build/admin-view.js', __FILE__), array(), false, true);
+	\wp_localize_script('gs-admin-script', 'gs_admin_ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
 }
 
 /**

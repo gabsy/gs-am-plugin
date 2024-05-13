@@ -5,6 +5,9 @@ import axios from 'axios';
 import formattedDate from './js/utils/formatted-date';
 
 document.addEventListener('DOMContentLoaded', function() {
+	if (!document.querySelector('.btn-refresh-data')) {
+		return;
+	}
 	const refreshButton = document.querySelector('.btn-refresh-data');
 	const dataTableTitle = document.querySelector('.data-table-title span');
 	const dataTableBody = document.querySelector('.data-table tbody');
